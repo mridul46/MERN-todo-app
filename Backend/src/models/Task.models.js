@@ -14,15 +14,16 @@ const taskSchema= new Schema({
     },
     category:{
         type:String,
-        enum:["work","Study","Personal","Other"],
+        enum:["Work","Study","Personal","Other"],
         default:"Other",
         required:true,
     },
-    Priority:{
-        type:String,
-        enum:["High","Medium","Low"],
-        default:"Low",
+     priority: {
+     type:String,
+     enum:["High","Medium","Low"],
+     default:"Low",
     },
+
     due_date:{
         type:Date,
     },
@@ -38,6 +39,6 @@ const taskSchema= new Schema({
 },
 {timestamps:true},
 );
-taskSchema.index({ completed: 1, category: 1, priority: 1, due_date: -1 });
+taskSchema.index({ complete: 1, category: 1, priority: 1, due_date: -1 });
 taskSchema.index({ title: "text", description: "text" });
 export const Task=mongoose.model("Task",taskSchema);

@@ -3,28 +3,31 @@ import { ApiResponse } from "../utils/api-response.js";
 import { User } from "../models/User.models.js";
 import { asyncHandler } from "../utils/async-handler.js";
 import bcrypt from "bcrypt"; 
-import jwt from "jsonwebtoken";
 
-// Generate Access and Refresh Tokens
+
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
-    const user = await User.findById(userId); 
+    console.log("generateAccessAndRefreshTokens called with userId:", userId);
+
+    const user = await User.findById(userId);
     if (!user) {
+      console.error("User not found in DB");
       throw new ApiError(404, "User not found while generating tokens");
     }
+
+    console.log("ENV ACCESS_TOKEN_SECRET:", process.env.ACCESS_TOKEN_SECRET);
+    console.log("ENV REFRESH_TOKEN_SECRET:", process.env.REFRESH_TOKEN_SECRET);
 
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
     user.refreshToken = refreshToken;
-    await user.save({ validateBeforeSave: false }); 
+    await user.save({ validateBeforeSave: false });
 
     return { accessToken, refreshToken };
   } catch (error) {
-    throw new ApiError(
-      500,
-      "Something went wrong while generating access and refresh tokens"
-    );
+    console.error("Token generation failed:", error.message);
+    throw new ApiError(500, "Something went wrong while generating access and refresh tokens");
   }
 };
 
@@ -84,11 +87,12 @@ const login = asyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
   
-  const options={
-    httpOnly:true,
-    secure:true,
-  }
-  
+ const options = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production", // ✅ only secure in production
+  sameSite: "lax"
+};
+
   return res
   .status(200)
   .cookie("accessToken",accessToken,options)
