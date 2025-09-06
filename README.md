@@ -2,7 +2,7 @@
 
 A full-stack **MERN (MongoDB, Express, React, Node.js)** application with **JWT Authentication**, built to manage daily tasks efficiently. Users can **register, log in, create, update, and delete tasks**.  
 
-🌐 **Live Demo (Frontend):** [MERN Todo Frontend]([https://mern-todo-app-frontend-tnri.onrender.com](https://mern-todo-app-frontend-ln7g.onrender.com/login))  
+🌐 **Live Demo (Frontend):** [MERN Todo Frontend](https://mern-todo-app-frontend-ln7g.onrender.com/login)  
 📄 **API Documentation (Postman):** [View API Docs](https://documenter.getpostman.com/view/41811237/2sB3Hkr1Fn)  
 
 ---
