@@ -6,7 +6,7 @@ const app = express();
 
 // CORS configuration (single middleware)
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || "https://mern-todo-app-frontend-ln7g.onrender.com" || "http://localhost:3000 ",
+  origin:  "https://mern-todo-app-frontend-ln7g.onrender.com" ,
   credentials: true,
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
