@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/api/v1",
+  baseURL: "https://mern-todo-app-backend-7xqu.onrender.com",
   withCredentials: true, // ✅ send/receive cookies
 });
 
